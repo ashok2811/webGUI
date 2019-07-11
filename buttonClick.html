@@ -1,0 +1,57 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+<script type="text/javascript">
+  // global variables
+  var canvas;
+  var ctx;
+  var xPos , yPos;
+  var pageX , pageY;
+  window.onload = function() {
+    canvas = document.getElementById("canvasArea");
+    ctx = canvas.getContext("2d");
+  }
+  // Funkcja
+  
+  function handler(e) {
+    e = e || window.event;
+
+    var pageX = e.pageX;
+    var pageY = e.pageY;
+
+    // IE 8
+    if (pageX === undefined) {
+        pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+        pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+    }
+
+
+    function drawCircle() { //draw circle
+    var xPos = pageX;
+      var yPos = pageY;
+      
+      var colour = '#' + Math.random().toString(16).substr(2,6);
+      ctx.beginPath();
+      ctx.arc(xPos, yPos, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = colour;
+      ctx.fill();
+  }
+  
+
+    console.log(pageX, pageY);
+    drawCircle(20, pageY, pageY);
+}
+
+if (document.attachEvent) document.attachEvent('onclick', handler);
+else document.addEventListener('click', handler);
+
+</script>
+</head>
+<body>
+
+<div style="width:100%; height:800px; margin:0 auto; padding:5px;">
+    <canvas id="canvasArea" width= "1880" height="900" style="border:2px solid black"></canvas>
+</div>
+</body>
+</html>
